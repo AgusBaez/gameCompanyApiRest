@@ -1,26 +1,28 @@
-import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { ShopService } from "./shop.service";
+import { ShopDTO } from './dtos/shop.dto';
+import { Shop } from "./interfaces/shop.interface";
 @Controller('shop')
 export class ShopController {
     constructor(private readonly shopService: ShopService){
         
     }
-    @Get()//obtiene
-    findAll(): string{
-        return "findAll"
+    @Get(':id')//obtiene mediante la id
+    find(@Param('id')id): Promise<Shop>{
+        return this.shopService.find(id);
     }
 
     @Post()//crea
-    new(): string {
+    create(): string {
         return "New"
     }
 
-    @Put()//Actualiza
+    @Put(':id')//Actualiza
     update(): string {
         return "Update"
     }
 
-    @Delete()//Elimina
+    @Delete(':id')//Elimina
     delete(): string {
         return "Deleted"
     }

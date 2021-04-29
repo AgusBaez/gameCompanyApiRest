@@ -6,20 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.ShopModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const shop_module_1 = require("./shop/shop.module");
 const mongoose_1 = require("@nestjs/mongoose");
-let AppModule = class AppModule {
+const shop_controller_1 = require("./shop.controller");
+const shop_service_1 = require("./shop.service");
+const shop_schema_1 = require("./schemas/shop.schema");
+let ShopModule = class ShopModule {
 };
-AppModule = __decorate([
+ShopModule = __decorate([
     common_1.Module({
-        imports: [shop_module_1.ShopModule, mongoose_1.MongooseModule.forRoot('mongodb://localhost:27017/shop')],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        imports: [mongoose_1.MongooseModule.forFeature([{ name: 'Shop', schema: shop_schema_1.ShopSchema }])],
+        controllers: [shop_controller_1.ShopController],
+        providers: [shop_service_1.ShopService],
     })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], ShopModule);
+exports.ShopModule = ShopModule;
+//# sourceMappingURL=shop.module.js.map
